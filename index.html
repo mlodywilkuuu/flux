@@ -7,7 +7,6 @@
     <style>
         .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
         
-        /* Animowany gradient w tle */
         body { 
             background: linear-gradient(135deg, #0f172a, #1e293b, #312e81, #0f172a); 
             background-size: 400% 400%;
@@ -26,9 +25,21 @@
 
     <nav id="nav-island" class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-2xl z-40">
         <div class="text-2xl font-black italic tracking-tighter flux-gradient">FLUX</div>
-        <button onclick="toggleModal(true)" class="px-5 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition">
-            Zaloguj / Rejestracja
-        </button>
+        
+        <div class="flex items-center gap-6 text-sm font-medium text-gray-300">
+            <a href="#" class="hover:text-white transition">Platforma</a>
+            <a href="#" class="hover:text-white transition">Zespoły</a>
+            
+            <select class="bg-transparent text-gray-300 hover:text-white cursor-pointer outline-none transition">
+                <option value="pl">🇵🇱 PL</option>
+                <option value="en">🇬🇧 EN</option>
+                <option value="de">🇩🇪 DE</option>
+            </select>
+            
+            <button onclick="toggleModal(true)" class="px-5 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition">
+                Zaloguj / Rejestracja
+            </button>
+        </div>
     </nav>
 
     <div id="landing-page" class="h-screen flex items-center justify-center"></div>
