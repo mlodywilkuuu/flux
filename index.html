@@ -11,12 +11,19 @@
 </head>
 <body class="text-gray-200 h-screen overflow-hidden">
 
-    <div id="landing-page" class="h-screen flex flex-col items-center justify-center text-center p-6">
-        <h1 class="text-6xl font-extrabold mb-6">Witaj we <span class="text-blue-500">Flux</span></h1>
-        <p class="text-xl text-gray-400 mb-10">Najlepsza przestrzeń do pracy i rozmów.</p>
-        <button onclick="toggleModal(true)" class="px-8 py-4 bg-blue-600 rounded-full font-bold hover:bg-blue-500 transition shadow-lg">
-            Rozpocznij przygodę
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-2xl z-40">
+        <div class="text-2xl font-black italic tracking-tighter">FLUX</div>
+        <div class="flex gap-8 text-sm font-medium text-gray-300">
+            <a href="#" class="hover:text-white transition">Platforma</a>
+            <a href="#" class="hover:text-white transition">Zespoły</a>
+        </div>
+        <button onclick="toggleModal(true)" class="px-5 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition">
+            Logowanie / Rejestracja
         </button>
+    </nav>
+
+    <div id="landing-page" class="h-screen flex items-center justify-center text-center p-6">
+        <h1 class="text-6xl font-extrabold">Witaj we <span class="text-blue-500">Flux</span></h1>
     </div>
 
     <div id="app-view" class="hidden h-screen flex">
@@ -25,14 +32,15 @@
         </nav>
         <aside class="w-60 bg-black/10 flex flex-col p-4">
             <div class="font-bold text-white mb-6">Flux Główny</div>
-            <div class="space-y-2 text-gray-400"><div class="hover:bg-white/10 p-2 rounded cursor-pointer transition"># ogólny</div></div>
             <button onclick="logout()" class="mt-auto text-red-400 text-sm hover:underline">Wyloguj</button>
         </aside>
         <main class="flex-1 p-6"><h2 class="font-bold text-white text-xl">Witaj wewnątrz Flux</h2></main>
     </div>
 
     <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
-        <div class="glass p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl">
+        <div class="glass p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl relative">
+            <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+            
             <h2 class="text-2xl font-bold mb-6 text-center">Logowanie</h2>
             <input type="email" placeholder="Email" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
             <input type="password" placeholder="Hasło" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
@@ -47,6 +55,7 @@
 
         function login() {
             document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('nav-island').classList.add('hidden'); // Opcjonalne ukrycie menu
             document.getElementById('app-view').classList.remove('hidden');
             toggleModal(false);
         }
