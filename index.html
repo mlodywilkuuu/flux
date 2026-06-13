@@ -19,11 +19,6 @@
         }
 
         .flux-gradient { background: linear-gradient(to right, #3b82f6 50%, #ffffff 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Stylizacja menu języków */
-        select { appearance: none; cursor: pointer; transition: all 0.3s ease; }
-        select:hover { color: white; background: rgba(255,255,255,0.1); }
-        select option { background-color: #0f172a; color: white; padding: 10px; }
     </style>
 </head>
 <body class="text-gray-200 h-screen overflow-hidden">
@@ -31,18 +26,9 @@
     <nav id="nav-island" class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl glass rounded-full px-8 py-3 flex justify-between items-center shadow-2xl z-40">
         <div class="text-2xl font-black italic tracking-tighter flux-gradient">FLUX</div>
         
-        <div class="flex items-center gap-4 text-sm font-medium">
-            <select class="bg-transparent border border-white/10 rounded-full px-4 py-1.5 text-gray-300 outline-none hover:border-white/30">
-                <option value="pl">🇵🇱 Polski</option>
-                <option value="en">🇬🇧 English</option>
-                <option value="es">🇪🇸 Español</option>
-                <option value="ru">🇷🇺 Русский</option>
-            </select>
-            
-            <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 active:scale-95 shadow-lg">
-                Zaloguj / Rejestracja
-            </button>
-        </div>
+        <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 active:scale-95 shadow-lg">
+            Zaloguj / Rejestracja
+        </button>
     </nav>
 
     <div id="landing-page" class="h-screen flex items-center justify-center"></div>
@@ -75,6 +61,9 @@
     </div>
 
     <script>
+        // Automatyczne ustawienie języka przeglądarki
+        document.documentElement.lang = navigator.language || navigator.userLanguage;
+
         let isLogin = true;
         function toggleModal(show) { document.getElementById('login-modal').classList.toggle('hidden', !show); }
         
