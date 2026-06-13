@@ -1,52 +1,17 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Flux | Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-900 text-white min-h-screen">
+<nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl z-50">
+    <div class="flex items-center justify-between px-6 py-4 rounded-3xl bg-white/10 backdrop-blur-lg border border-white/20 shadow-xl">
+        
+        <div class="text-2xl font-bold text-white tracking-tighter">FLUX</div>
 
-    <div id="login-view" class="flex h-screen items-center justify-center">
-        <div class="bg-gray-800 p-8 rounded-xl w-full max-w-sm border border-gray-700">
-            <h2 class="text-3xl font-bold text-blue-500 mb-6 text-center">Flux</h2>
-            <input type="email" placeholder="Email" class="w-full p-3 mb-4 rounded bg-gray-900 border border-gray-600">
-            <button onclick="login()" class="w-full bg-blue-600 p-3 rounded font-bold">Zaloguj się</button>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-gray-200">
+            <a href="#" class="hover:text-blue-400 transition">O nas</a>
+            <a href="#" class="hover:text-blue-400 transition">Funkcje</a>
+            <a href="#" class="hover:text-blue-400 transition">Społeczność</a>
         </div>
+
+        <button onclick="window.location.href='index.html'" 
+                class="px-5 py-2 bg-blue-600 hover:bg-blue-500 rounded-full text-sm font-semibold transition shadow-lg">
+            Logowanie / Rejestracja
+        </button>
     </div>
-
-    <div id="app-view" class="hidden flex h-screen">
-        <aside class="w-64 bg-gray-800 p-6">
-            <h1 class="text-2xl font-bold text-blue-500 mb-10">FLUX</h1>
-            <nav class="space-y-4">
-                <div class="cursor-pointer hover:text-blue-400">Strona Główna</div>
-                <div class="cursor-pointer hover:text-blue-400">Wiadomości</div>
-            </nav>
-            <button onclick="logout()" class="mt-10 text-gray-400 text-sm">Wyloguj</button>
-        </aside>
-        <main class="flex-1 p-8">
-            <h2 class="text-2xl font-semibold">Witaj w Flux!</h2>
-            <p class="text-gray-400 mt-4">Jesteś teraz wewnątrz systemu.</p>
-        </main>
-    </div>
-
-    <script>
-        // Logika przełączania widoków
-        function login() {
-            localStorage.setItem('isLoggedIn', 'true');
-            window.location.reload(); // Odświeżenie sprawdzi stan
-        }
-
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            window.location.reload();
-        }
-
-        // Sprawdzenie przy ładowaniu strony
-        if (localStorage.getItem('isLoggedIn') === 'true') {
-            document.getElementById('login-view').classList.add('hidden');
-            document.getElementById('app-view').classList.remove('hidden');
-        }
-    </script>
-</body>
-</html>
+</nav>
