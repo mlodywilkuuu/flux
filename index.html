@@ -7,61 +7,69 @@
     <style>
         .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
         body { background: radial-gradient(circle at top right, #1e293b, #0f172a, #000000); }
+        .flux-gradient { background: linear-gradient(to right, #3b82f6 50%, #ffffff 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="text-gray-200 h-screen overflow-hidden">
 
-    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-2xl z-40">
-        <div class="text-2xl font-black italic tracking-tighter">FLUX</div>
-        <div class="flex gap-8 text-sm font-medium text-gray-300">
-            <a href="#" class="hover:text-white transition">Platforma</a>
-            <a href="#" class="hover:text-white transition">Zespoły</a>
-        </div>
+    <nav id="nav-island" class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-5xl glass rounded-2xl px-6 py-4 flex justify-between items-center shadow-2xl z-40">
+        <div class="text-2xl font-black italic tracking-tighter flux-gradient">FLUX</div>
         <button onclick="toggleModal(true)" class="px-5 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition">
-            Logowanie / Rejestracja
+            Zaloguj / Rejestracja
         </button>
     </nav>
 
-    <div id="landing-page" class="h-screen flex items-center justify-center text-center p-6">
-        <h1 class="text-6xl font-extrabold">Witaj we <span class="text-blue-500">Flux</span></h1>
-    </div>
+    <div id="landing-page" class="h-screen flex items-center justify-center"></div>
 
     <div id="app-view" class="hidden h-screen flex">
         <nav class="w-[72px] bg-black/20 backdrop-blur-md flex flex-col items-center py-4 space-y-4">
             <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center font-bold text-white shadow-lg">FX</div>
         </nav>
-        <aside class="w-60 bg-black/10 flex flex-col p-4">
-            <div class="font-bold text-white mb-6">Flux Główny</div>
-            <button onclick="logout()" class="mt-auto text-red-400 text-sm hover:underline">Wyloguj</button>
-        </aside>
-        <main class="flex-1 p-6"><h2 class="font-bold text-white text-xl">Witaj wewnątrz Flux</h2></main>
+        <main class="flex-1 p-6 flex flex-col items-center justify-center">
+            <h2 class="font-bold text-white text-2xl">Witaj wewnątrz Flux</h2>
+            <button onclick="logout()" class="mt-4 text-red-400 hover:underline">Wyloguj</button>
+        </main>
     </div>
 
     <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
         <div class="glass p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl relative">
             <button onclick="toggleModal(false)" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
             
-            <h2 class="text-2xl font-bold mb-6 text-center">Logowanie</h2>
+            <h2 id="modal-title" class="text-2xl font-bold mb-6 text-center">Logowanie</h2>
             <input type="email" placeholder="Email" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
             <input type="password" placeholder="Hasło" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
-            <button onclick="login()" class="w-full py-3 bg-blue-600 rounded-lg font-bold hover:bg-blue-500 transition">Zaloguj</button>
+            
+            <button onclick="login()" id="action-btn" class="w-full py-3 bg-blue-600 rounded-lg font-bold hover:bg-blue-500 transition">Zaloguj</button>
+            
+            <p class="mt-4 text-center text-sm text-gray-400">
+                <span id="switch-text">Nie masz konta?</span> 
+                <button onclick="toggleAuthMode()" class="text-blue-400 hover:underline font-bold" id="switch-btn">Rejestracja</button>
+            </p>
         </div>
     </div>
 
     <script>
-        function toggleModal(show) {
-            document.getElementById('login-modal').classList.toggle('hidden', !show);
+        let isLogin = true;
+        function toggleModal(show) { document.getElementById('login-modal').classList.toggle('hidden', !show); }
+        
+        function toggleAuthMode() {
+            isLogin = !isLogin;
+            document.getElementById('modal-title').innerText = isLogin ? 'Logowanie' : 'Rejestracja';
+            document.getElementById('action-btn').innerText = isLogin ? 'Zaloguj' : 'Zarejestruj';
+            document.getElementById('switch-text').innerText = isLogin ? 'Nie masz konta?' : 'Masz już konto?';
+            document.getElementById('switch-btn').innerText = isLogin ? 'Rejestracja' : 'Zaloguj';
         }
 
         function login() {
             document.getElementById('landing-page').classList.add('hidden');
-            document.getElementById('nav-island').classList.add('hidden'); // Opcjonalne ukrycie menu
+            document.getElementById('nav-island').classList.add('hidden');
             document.getElementById('app-view').classList.remove('hidden');
             toggleModal(false);
         }
 
         function logout() {
             document.getElementById('landing-page').classList.remove('hidden');
+            document.getElementById('nav-island').classList.remove('hidden');
             document.getElementById('app-view').classList.add('hidden');
         }
     </script>
