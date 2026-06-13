@@ -17,26 +17,31 @@
             100% { background-position: 0% 50%; }
         }
         .flux-gradient { background: linear-gradient(to right, #3b82f6 50%, #ffffff 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Naprawa menu: dodano przestrzeń, aby nie znikało */
+        .dropdown-menu { display: none; padding-top: 15px; }
         .dropdown:hover .dropdown-menu { display: block; }
     </style>
 </head>
 <body class="text-gray-200 h-screen overflow-hidden">
 
     <nav id="nav-island" class="fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-4xl glass rounded-full px-8 py-3 flex justify-between items-center shadow-2xl z-40">
-        <div class="flex items-center gap-6">
-            <div class="text-2xl font-black italic tracking-tighter flux-gradient">FLUX</div>
-            <button class="text-xs font-bold hover:text-white transition">BLOG</button>
+        <div class="flex items-center gap-8">
+            <div class="text-2xl font-black italic tracking-tighter flux-gradient mr-4">FLUX</div>
+            <button class="text-xs font-bold hover:text-white transition whitespace-nowrap">BLOG</button>
             <div class="dropdown relative">
-                <button class="text-xs font-bold hover:text-white transition">POMOC ▾</button>
-                <div class="dropdown-menu hidden absolute top-full left-0 mt-2 glass rounded-xl p-2 w-40">
-                    <button class="block w-full text-left text-xs p-2 hover:bg-white/10 rounded">FAQ</button>
-                    <button class="block w-full text-left text-xs p-2 hover:bg-white/10 rounded">FEEDBACK</button>
-                    <button class="block w-full text-left text-xs p-2 hover:bg-white/10 rounded">WYŚLIJ ZGŁOSZENIE</button>
+                <button class="text-xs font-bold hover:text-white transition whitespace-nowrap">POMOC ▾</button>
+                <div class="dropdown-menu absolute top-0 left-0 pt-10">
+                    <div class="glass rounded-xl p-2 w-48 shadow-2xl">
+                        <button class="block w-full text-left text-xs p-3 hover:bg-white/10 rounded transition">FAQ</button>
+                        <button class="block w-full text-left text-xs p-3 hover:bg-white/10 rounded transition">FEEDBACK</button>
+                        <button class="block w-full text-left text-xs p-3 hover:bg-white/10 rounded transition">WYŚLIJ ZGŁOSZENIE</button>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 shadow-lg">
+        <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 shadow-lg whitespace-nowrap">
             ZALOGUJ / REJESTRACJA
         </button>
     </nav>
@@ -82,13 +87,11 @@
         function login() {
             const email = document.getElementById('email').value;
             const pass = document.getElementById('pass').value;
-            
             if(email === 'admin@flux.pl' && pass === 'admin') {
                 document.getElementById('welcome-text').innerText = 'WITAJ W PANELU ADMINA';
             } else {
                 document.getElementById('welcome-text').innerText = 'WITAJ WEWNĄTRZ FLUX';
             }
-            
             document.getElementById('landing-page').classList.add('hidden');
             document.getElementById('nav-island').classList.add('hidden');
             document.getElementById('app-view').classList.remove('hidden');
