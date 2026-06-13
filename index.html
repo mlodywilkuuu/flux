@@ -6,48 +6,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        /* Gradient tła */
         body { background: radial-gradient(circle at top right, #1e293b, #0f172a, #000000); }
     </style>
 </head>
 <body class="text-gray-200 h-screen overflow-hidden">
 
-    <div id="app-view" class="h-screen flex">
+    <div id="landing-page" class="h-screen flex flex-col items-center justify-center text-center p-6">
+        <h1 class="text-6xl font-extrabold mb-6">Witaj we <span class="text-blue-500">Flux</span></h1>
+        <p class="text-xl text-gray-400 mb-10">Najlepsza przestrzeń do pracy i rozmów.</p>
+        <button onclick="toggleModal(true)" class="px-8 py-4 bg-blue-600 rounded-full font-bold hover:bg-blue-500 transition shadow-lg">
+            Rozpocznij przygodę
+        </button>
+    </div>
+
+    <div id="app-view" class="hidden h-screen flex">
         <nav class="w-[72px] bg-black/20 backdrop-blur-md flex flex-col items-center py-4 space-y-4">
             <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center font-bold text-white shadow-lg">FX</div>
         </nav>
-        
         <aside class="w-60 bg-black/10 flex flex-col p-4">
             <div class="font-bold text-white mb-6">Flux Główny</div>
-            <div class="space-y-2 text-gray-400">
-                <div class="hover:bg-white/10 p-2 rounded cursor-pointer transition"># ogólny</div>
-            </div>
-            <button onclick="toggleModal(true)" class="mt-auto text-blue-400 text-sm hover:underline">Zaloguj się</button>
+            <div class="space-y-2 text-gray-400"><div class="hover:bg-white/10 p-2 rounded cursor-pointer transition"># ogólny</div></div>
+            <button onclick="logout()" class="mt-auto text-red-400 text-sm hover:underline">Wyloguj</button>
         </aside>
-
-        <main class="flex-1 p-6">
-            <h2 class="font-bold text-white text-xl">Witaj we Flux</h2>
-        </main>
+        <main class="flex-1 p-6"><h2 class="font-bold text-white text-xl">Witaj wewnątrz Flux</h2></main>
     </div>
 
     <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
         <div class="glass p-8 rounded-2xl w-full max-w-sm border border-white/10 shadow-2xl">
-            <h2 class="text-2xl font-bold mb-6 text-center">Witaj we Flux</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center">Logowanie</h2>
             <input type="email" placeholder="Email" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
             <input type="password" placeholder="Hasło" class="w-full p-3 mb-4 bg-black/30 rounded-lg border border-white/10 outline-none">
-            <button onclick="toggleModal(false)" class="w-full py-3 bg-blue-600 rounded-lg font-bold hover:bg-blue-500 transition">Wejdź</button>
-            <button onclick="toggleModal(false)" class="w-full py-2 mt-2 text-gray-400 text-sm hover:underline">Zamknij</button>
+            <button onclick="login()" class="w-full py-3 bg-blue-600 rounded-lg font-bold hover:bg-blue-500 transition">Zaloguj</button>
         </div>
     </div>
 
     <script>
         function toggleModal(show) {
-            const modal = document.getElementById('login-modal');
-            if (show) {
-                modal.classList.remove('hidden');
-            } else {
-                modal.classList.add('hidden');
-            }
+            document.getElementById('login-modal').classList.toggle('hidden', !show);
+        }
+
+        function login() {
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('app-view').classList.remove('hidden');
+            toggleModal(false);
+        }
+
+        function logout() {
+            document.getElementById('landing-page').classList.remove('hidden');
+            document.getElementById('app-view').classList.add('hidden');
         }
     </script>
 </body>
