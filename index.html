@@ -17,10 +17,7 @@
             100% { background-position: 0% 50%; }
         }
         
-        /* Animacja koloru napisu FLUX */
-        .flux-animation { 
-            animation: colorChange 4s infinite alternate; 
-        }
+        .flux-animation { animation: colorChange 4s infinite alternate; }
         @keyframes colorChange {
             0% { color: #3b82f6; }
             100% { color: #ffffff; }
@@ -54,7 +51,14 @@
         </button>
     </nav>
 
-    <div id="landing-page" class="h-screen flex items-center justify-center"></div>
+    <div id="landing-page" class="h-screen flex flex-col items-center justify-center text-center px-4">
+        <h1 class="text-5xl md:text-7xl font-black italic uppercase leading-tight mb-6">
+            GRUPOWY CZAT,<br>KTÓRY TO CZYSTA<br>ZABAWA I GRA
+        </h1>
+        <p class="max-w-md text-gray-400">
+            Flux jest świetny do grania w gry, chillowania ze znajomymi lub budowania światowej społeczności. Dostosuj swoją przestrzeń, aby rozmawiać, grać i spędzać czas.
+        </p>
+    </div>
 
     <div id="app-view" class="hidden h-screen flex">
         <nav class="w-[72px] bg-black/20 backdrop-blur-md flex flex-col items-center py-4 space-y-4">
