@@ -43,8 +43,9 @@
                 </div>
             </div>
         </div>
-        <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 shadow-lg whitespace-nowrap">
-            ZALOGUJ / REJESTRACJA
+        
+        <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-[11px] font-black hover:bg-gray-200 transition-all transform hover:scale-105 shadow-lg whitespace-nowrap uppercase">
+            Zaloguj / Rejestracja
         </button>
     </nav>
 
@@ -69,4 +70,65 @@
                     <div class="font-bold text-white">WILKU</div>
                     <div class="text-gray-400 text-[10px]">Dostępny</div>
                 </div>
-                <div class="flex gap-2
+                <div class="flex gap-2">
+                    <button class="hover:bg-white/10 p-1.5 rounded transition">🎙️</button>
+                    <button class="hover:bg-white/10 p-1.5 rounded transition">🎧</button>
+                    <button class="hover:bg-white/10 p-1.5 rounded transition">⚙️</button>
+                </div>
+            </div>
+        </aside>
+        <main class="flex-1 p-6 flex flex-col items-center justify-center">
+            <h2 id="welcome-text" class="font-bold text-white text-2xl">WITAJ WEWNĄTRZ FLUX</h2>
+            <button onclick="logout()" class="mt-4 text-red-400 hover:underline">WYLOGUJ</button>
+        </main>
+    </div>
+
+    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
+        <div class="glass p-8 rounded-3xl w-full max-w-sm border border-white/10 shadow-2xl relative">
+            <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
+            <h2 id="modal-title" class="text-2xl font-bold mb-6 text-center uppercase">Logowanie</h2>
+            <input type="email" id="email" placeholder="Email" class="w-full p-3 mb-4 bg-black/30 rounded-xl border border-white/10 outline-none">
+            <input type="password" id="pass" placeholder="Hasło" class="w-full p-3 mb-4 bg-black/30 rounded-xl border border-white/10 outline-none">
+            <button onclick="login()" id="action-btn" class="w-full py-3 bg-blue-600 rounded-xl font-bold hover:bg-blue-500 transition uppercase">Zaloguj</button>
+            <p class="mt-4 text-center text-sm text-gray-400">
+                <span id="switch-text">Nie masz konta?</span> 
+                <button onclick="toggleAuthMode()" class="text-blue-400 hover:underline font-bold" id="switch-btn">Rejestracja</button>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        document.documentElement.lang = navigator.language || navigator.userLanguage;
+        let isLogin = true;
+        function toggleModal(show) { document.getElementById('login-modal').classList.toggle('hidden', !show); }
+        
+        function toggleAuthMode() {
+            isLogin = !isLogin;
+            document.getElementById('modal-title').innerText = isLogin ? 'Logowanie' : 'Rejestracja';
+            document.getElementById('action-btn').innerText = isLogin ? 'Zaloguj' : 'Zarejestruj';
+            document.getElementById('switch-text').innerText = isLogin ? 'Nie masz konta?' : 'Masz już konto?';
+            document.getElementById('switch-btn').innerText = isLogin ? 'Rejestracja' : 'Zaloguj';
+        }
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('pass').value;
+            if(email === 'admin@flux.pl' && pass === 'admin') {
+                document.getElementById('welcome-text').innerText = 'WITAJ W PANELU ADMINA';
+            } else {
+                document.getElementById('welcome-text').innerText = 'WITAJ WEWNĄTRZ FLUX';
+            }
+            document.getElementById('landing-page').classList.add('hidden');
+            document.getElementById('nav-island').classList.add('hidden');
+            document.getElementById('app-view').classList.remove('hidden');
+            toggleModal(false);
+        }
+
+        function logout() {
+            document.getElementById('landing-page').classList.remove('hidden');
+            document.getElementById('nav-island').classList.remove('hidden');
+            document.getElementById('app-view').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
