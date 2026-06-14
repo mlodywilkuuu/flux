@@ -16,13 +16,11 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
         .flux-animation { animation: colorChange 4s infinite alternate; }
         @keyframes colorChange {
             0% { color: #3b82f6; }
             100% { color: #ffffff; }
         }
-
         .dropdown-menu { display: none; padding-top: 15px; }
         .dropdown:hover .dropdown-menu { display: block; }
     </style>
@@ -45,7 +43,6 @@
                 </div>
             </div>
         </div>
-        
         <button onclick="toggleModal(true)" class="px-6 py-2 bg-white text-black rounded-full text-xs font-bold hover:bg-gray-200 transition transform hover:scale-105 shadow-lg whitespace-nowrap">
             ZALOGUJ / REJESTRACJA
         </button>
@@ -61,60 +58,15 @@
     </div>
 
     <div id="app-view" class="hidden h-screen flex">
-        <nav class="w-[72px] bg-black/20 backdrop-blur-md flex flex-col items-center py-4 space-y-4">
-            <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center font-bold text-white shadow-lg">FX</div>
-        </nav>
-        <main class="flex-1 p-6 flex flex-col items-center justify-center">
-            <h2 id="welcome-text" class="font-bold text-white text-2xl">WITAJ WEWNĄTRZ FLUX</h2>
-            <button onclick="logout()" class="mt-4 text-red-400 hover:underline">WYLOGUJ</button>
-        </main>
-    </div>
-
-    <div id="login-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center z-50 p-4">
-        <div class="glass p-8 rounded-3xl w-full max-w-sm border border-white/10 shadow-2xl relative">
-            <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-gray-400 hover:text-white text-xl font-bold">&times;</button>
-            <h2 id="modal-title" class="text-2xl font-bold mb-6 text-center">LOGOWANIE</h2>
-            <input type="email" id="email" placeholder="Email" class="w-full p-3 mb-4 bg-black/30 rounded-xl border border-white/10 outline-none">
-            <input type="password" id="pass" placeholder="Hasło" class="w-full p-3 mb-4 bg-black/30 rounded-xl border border-white/10 outline-none">
-            <button onclick="login()" id="action-btn" class="w-full py-3 bg-blue-600 rounded-xl font-bold hover:bg-blue-500 transition">ZALOGUJ</button>
-            <p class="mt-4 text-center text-sm text-gray-400">
-                <span id="switch-text">NIE MASZ KONTA?</span> 
-                <button onclick="toggleAuthMode()" class="text-blue-400 hover:underline font-bold" id="switch-btn">REJESTRACJA</button>
-            </p>
-        </div>
-    </div>
-
-    <script>
-        let isLogin = true;
-        function toggleModal(show) { document.getElementById('login-modal').classList.toggle('hidden', !show); }
-        
-        function toggleAuthMode() {
-            isLogin = !isLogin;
-            document.getElementById('modal-title').innerText = isLogin ? 'LOGOWANIE' : 'REJESTRACJA';
-            document.getElementById('action-btn').innerText = isLogin ? 'ZALOGUJ' : 'ZAREJESTRUJ';
-            document.getElementById('switch-text').innerText = isLogin ? 'NIE MASZ KONTA?' : 'MASZ JUŻ KONTO?';
-            document.getElementById('switch-btn').innerText = isLogin ? 'REJESTRACJA' : 'ZALOGUJ';
-        }
-
-        function login() {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('pass').value;
-            if(email === 'admin@flux.pl' && pass === 'admin') {
-                document.getElementById('welcome-text').innerText = 'WITAJ W PANELU ADMINA';
-            } else {
-                document.getElementById('welcome-text').innerText = 'WITAJ WEWNĄTRZ FLUX';
-            }
-            document.getElementById('landing-page').classList.add('hidden');
-            document.getElementById('nav-island').classList.add('hidden');
-            document.getElementById('app-view').classList.remove('hidden');
-            toggleModal(false);
-        }
-
-        function logout() {
-            document.getElementById('landing-page').classList.remove('hidden');
-            document.getElementById('nav-island').classList.remove('hidden');
-            document.getElementById('app-view').classList.add('hidden');
-        }
-    </script>
-</body>
-</html>
+        <aside class="w-60 bg-black/20 flex flex-col justify-between">
+            <div class="p-4"><h2 class="font-bold text-white text-xl">FLUX</h2></div>
+            <div class="bg-black/30 p-2 flex items-center gap-2 text-xs">
+                <div class="relative">
+                    <img src="https://ui-avatars.com/api/?name=W" class="w-9 h-9 rounded-full">
+                    <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-[#1e293b]"></div>
+                </div>
+                <div class="flex-1 overflow-hidden">
+                    <div class="font-bold text-white">WILKU</div>
+                    <div class="text-gray-400 text-[10px]">Dostępny</div>
+                </div>
+                <div class="flex gap-2
